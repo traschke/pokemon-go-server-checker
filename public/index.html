@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pokémon GO Server Status</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script data-main="js/appclient" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Pokémon GO</h2>
+                    <div id="status">
+                        <script type="text/template" id="status-template">
+                            <% var temp = {
+                                status: '',
+                                glyphicon: '',
+                                alert: ''
+                            }
+                            if (status == 'online') {
+                                temp.status = 'ONLINE';
+                                temp.glyphicon = 'glyphicon-ok';
+                                temp.alert = 'alert-success';
+                            }
+                            if (status == 'unstable') {
+                                temp.status = 'UNSTABLE';
+                                temp.glyphicon = 'glyphicon-exclamation-sign';
+                                temp.alert = 'alert-warning';
+                            }
+                            if (status == 'offline') {
+                                temp.status = 'OFFLINE';
+                                temp.glyphicon = 'glyphicon glyphicon-remove';
+                                temp.alert = 'alert-danger';
+                            } %>
+                            <div class="alert <%= temp.alert %>" role="alert">
+                                <span class="glyphicon <%= temp.glyphicon %>" aria-hidden="true"></span>
+                                <%= temp.status %>
+                            </div>
+                            Latency: <%= latency %> ms
+                        </script>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</body>
+</html>
