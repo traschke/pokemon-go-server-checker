@@ -8,6 +8,14 @@
     <script data-main="js/appclient" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Pokémon GO Server Checker</a>
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
     <div class="container">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -15,41 +23,19 @@
                     <h2>Pokémon GO</h2>
                     <div id="status">
                         <script type="text/template" id="status-template">
-                            <% var temp = {
-                                status: '',
-                                glyphicon: '',
-                                alert: ''
-                            }
-                            if (status == 'online') {
-                                temp.status = 'ONLINE';
-                                temp.glyphicon = 'glyphicon-ok';
-                                temp.alert = 'alert-success';
-                            }
-                            if (status == 'unstable') {
-                                temp.status = 'UNSTABLE';
-                                temp.glyphicon = 'glyphicon-exclamation-sign';
-                                temp.alert = 'alert-warning';
-                            }
-                            if (status == 'offline') {
-                                temp.status = 'OFFLINE';
-                                temp.glyphicon = 'glyphicon glyphicon-remove';
-                                temp.alert = 'alert-danger';
-                            } %>
-                            <div class="alert <%= temp.alert %>" role="alert">
-                                <span class="glyphicon <%= temp.glyphicon %>" aria-hidden="true"></span>
-                                <%= temp.status %>
+                            <div class="alert <%= alert %>" role="alert">
+                                <span class="glyphicon <%= glyphicon %>" aria-hidden="true"></span>
+                                <%= status %>
                             </div>
                             Latency: <%= latency %> ms
+                            <div class="pull-right">
+                                <a class="btn btn-default btn-reload" id="btn-reload" role="button">Reload</a>
+                            </div>
                         </script>
                     </div>
-
                 </div>
             </div>
-
-
-
         </div>
     </div>
-
 </body>
 </html>
