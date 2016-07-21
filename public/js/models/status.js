@@ -16,21 +16,5 @@ define(["backbone" , "underscore"], function(Backbone, _){
         }
     };
 
-    var StatusModel = Backbone.Model.extend(StatusSchema);
-
-    var StatusCollection = Backbone.Collection.extend({
-        model: StatusModel,
-        url: "/status",
-        initialize: function () {
-            this.on("add", function (video) {
-                if(video.isValid() && video.isNew()) {
-                    video.save();
-                }
-            })
-        }
-    });
-
-    result.Model = StatusModel;
-    result.Collection = StatusCollection;
-    return result;
+    return Backbone.Model.extend(StatusSchema);
 });

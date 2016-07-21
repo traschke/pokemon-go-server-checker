@@ -25,7 +25,7 @@ requirejs.config({
 
 // AMD conform require as provided by require.js
 require(['jquery', 'backbone', 'bootstrap', 'models/status', 'views/status'],
-        function($, Backbone, Bootstrap, Status, StatusView) {
+        function($, Backbone, Bootstrap, StatusModel, StatusView) {
 
     var AppRouter = Backbone.Router.extend({
         routes: {
@@ -33,23 +33,8 @@ require(['jquery', 'backbone', 'bootstrap', 'models/status', 'views/status'],
             '*whatever': 'main'
         },
         main: function(){
-            var statusCollection = new Status.Collection();
-            var renderMe = function() {
-                console.log('rerender');
-                statusCollection.fetch({
-                    success: function(collection, response) {
-                        if (response != undefined) {
-                            var statusView = new StatusView({model: statusCollection.at(0)});
-                            $('#status').html(statusView.render().el);
-                        }
-                        setTimeout(renderMe, 60000);
-                    },
-                    error: function(model, response) {
-                        console.error("error ",model,response);
-                    }
-                });
-            };
-            renderMe();
+            var statusModel = new StatusModel();
+            var statusView = new StatusView({model: statusModel});
         }
     });
 
