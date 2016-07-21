@@ -24,7 +24,6 @@ define(["backbone", "jquery", "underscore"], function(Backbone, $, _){
             this.delegateEvents();
         },
         initialize: function() {
-            var that = this;
             // Listeners
             this.model.on('change', this.render, this);
 
