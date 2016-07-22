@@ -11,11 +11,12 @@ var getLatency = function(url, timeout) {
         path: parsedUrl.pathname
     };
     return new Promise(function(resolve, reject) {
-        var start_time = new Date().getTime();
+        var start_time = process.hrtime();
         var request = https.get(options, function(res) {
             res.on('data', function(data) {
-                var request_time = new Date().getTime() - start_time;
-                resolve(request_time);
+                var request_time = process.hrtime(start_time);
+                var ms = parseInt(request_time[0] * 1000 + request_time[1] * 1e-6);
+                resolve(ms);
             });
         });
         request.on('error',function(err){
