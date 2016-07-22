@@ -24,6 +24,9 @@ define(["backbone", "jquery", "underscore"], function(Backbone, $, _){
             this.delegateEvents();
         },
         initialize: function() {
+            // Resolve scope issues in fetchData
+            _.bindAll(this, 'fetchData');
+
             // Listeners
             this.model.on('change', this.render, this);
 
@@ -31,20 +34,18 @@ define(["backbone", "jquery", "underscore"], function(Backbone, $, _){
             this.fetchData();
         },
         events: {
-            'click #btn-reload': 'reloadStatus'
-        },
-        reloadStatus: function () {
-            this.fetchData();
+            'click #btn-reload': 'fetchData'
         },
         fetchData: function() {
-            clearTimeout(this.timeout);
-            this.model.fetch({
+            var that = this;
+            clearTimeout(that.timeout);
+            that.model.fetch({
                 success: function(model, response) {
-                    console.log(response);
-                    this.timeout = setTimeout(this.fetchData, 60000);
+                    // console.log(response);
+                    that.timeout = setTimeout(that.fetchData, 60000);
                 },
                 error: function(model, response) {
-                    this.timeout = setTimeout(this.fetchData, 60000);
+                    that.timeout = setTimeout(that.fetchData, 60000);
                 }
             });
         }
